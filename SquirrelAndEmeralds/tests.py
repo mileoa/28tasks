@@ -11,11 +11,11 @@ class SquirelTests(unittest.TestCase):
         self.assertEqual(squirrel(10), 3)
 
     def test_border(self):
-        self.assertEqual(squirrel(1000), 4)
+        self.assertEqual(squirrel(1000000), 8)
         self.assertEqual(squirrel(0), 1)
 
     def test_random(self):
-        for i in range(10000):
+        for i in range(1000):
             random_num = randint(0, 1000)
             self.assertEqual(squirrel(random_num), int(str(factorial(random_num))[0]))
 

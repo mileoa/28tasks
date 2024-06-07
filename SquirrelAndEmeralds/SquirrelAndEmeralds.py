@@ -5,7 +5,9 @@ def factorial(N: int) -> int:
     return result
 
 def get_first_digit(num: int) -> int:
-    return int(str(num)[0])
+    while num >= 10:
+        num = num//10
+    return num
 
 def squirrel(N: int) -> int:
     return get_first_digit(factorial(N))
