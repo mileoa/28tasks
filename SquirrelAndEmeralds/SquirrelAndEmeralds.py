@@ -13,3 +13,7 @@ def squirrel(N: int) -> int:
     return get_first_digit(factorial(N))
 
 
+
+
+
+
