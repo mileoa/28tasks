@@ -20,7 +20,7 @@ def calculate_lenght_between_dots(a: int, b: int) -> float|int:
         return 1
     return 2**(0.5)
 
-def PatternUnlock(N:int, hits: list[int]) -> str:
+def PatternUnlock(N: int, hits: list[int]) -> str:
     lenght: float = 0.0
     result: list[str] = []
 
