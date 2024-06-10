@@ -38,7 +38,7 @@ def WordSearch(len: int, s: str, subs: str) -> list[int]:
     for word in words:
         lines = add_to_line(len, word, lines)
 
-    for i, line in enumerate(lines):
+    for line in lines:
         if have_word(line, subs):
             result.append(1)
             continue
