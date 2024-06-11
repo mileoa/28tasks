@@ -1,11 +1,18 @@
 def remove_chars(s: str, char: str) -> str:
+    """Remove given char from string."""
     result: list[str] = []
     for i in s:
         if i != char:
             result.append(i)
     return "".join(result)
 
-def make_matrix(s: str) -> list[list[str]]:
+def make_encode_matrix(s: str) -> list[list[str]]:
+    """Make cipher matrix from string.
+
+    Make chipher matrix from string with removed spaces.
+    Reuslt matrix additionaly has " " as elements
+    if string chars does not fills all matrix position.
+    """
     lenght: int = len(s)
     rows: int = int((lenght**0.5))
     columns: int = int(lenght**0.5) + 1
@@ -29,6 +36,12 @@ def make_matrix(s: str) -> list[list[str]]:
     return matrix
 
 def make_decode_matrix(s: str) -> list[list[str]]:
+    """Make decode matix.
+    
+    Make matrix from encrypted string.
+    Last matrix column may contain additional " " as elements
+    to fill empty elements.
+    """
     result: list[list[str]] = []
 
     columns: int = int(len(remove_chars(s, " "))**0.5) + 1
@@ -42,7 +55,7 @@ def make_decode_matrix(s: str) -> list[list[str]]:
 
 
 def trans_matrix(matrix: list[list[str]]) -> list[list[str]]:
-
+    """Transpose matrix."""
     result: list[list[str]] = []
     for i in range(len(matrix[0])):
         result.append([])
@@ -54,11 +67,11 @@ def trans_matrix(matrix: list[list[str]]) -> list[list[str]]:
     return result
 
 def TheRabbitsFoot(s: str, encode: bool) -> str:
-
+    """Encode or decode string with "red suitcase" cipher."""
     matrix: list[list[str]] = []
     if encode:
         space_removed: str = remove_chars(s, " ")
-        matrix = make_matrix(space_removed)
+        matrix = make_encode_matrix(space_removed)
     else:
         matrix = make_decode_matrix(s)
 
