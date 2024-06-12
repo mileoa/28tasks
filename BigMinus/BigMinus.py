@@ -35,6 +35,10 @@ def BigMinus(s1: str, s2: str) -> str:
             continue
         result[i] = str(int(result[i]) - int(subtrahend[i]))
 
+    # Remove leading zeros.
+    while result[0] == "0" and len(result) > 1:
+        del result[0]
+
     return "".join(result)
 
 
