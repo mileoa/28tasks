@@ -1,43 +1,45 @@
 def make_older(tree: list[list[int]]) -> list[list[int]]:
     """Return tree with branches one year older."""
-    result: list[list[int]] = tree[:]
+    tree: list[list[int]] = tree[:]
     for i, row in enumerate(tree):
         for j, el in enumerate(row):
             if el == 0:
                 continue
-            result[i][j] += 1
+            tree[i][j] += 1
 
-    return result
+    return tree
 
 def fill_empty(tree: list[list[int]]) -> list[list[int]]:
     """Return tree with filled empty places by 1 year branches."""
-    result: list[list[int]] = tree[:]
     for i, row in enumerate(tree):
         for j, el in enumerate(row):
             if el != 0:
                 continue
-            result[i][j] = 1
+            tree[i][j] = 1
 
-    return result
+    return tree
 
 def destroy_arround(tree: list[list[int]]) -> list[list[int]]:
     """Return tree with destroyd old branches and branches around."""
-    result: list[list[int]] = tree[:]
+    to_be_destroyed: list[tuple[int]] = []
     for i, row in enumerate(tree):
         for j, el in enumerate(row):
             if el < 3:
                 continue
-            result[i][j] = 0
+            to_be_destroyed.append((i, j))
             if i-1 >= 0:
-                result[i-1][j] = 0
+                to_be_destroyed.append((i-1, j))
             if i+1 <= len(tree)-1:
-                result[i+1][j] = 0
+                to_be_destroyed.append((i+1, j))
             if j-1 >= 0:
-                result[i][j-1] = 0
+                to_be_destroyed.append((i, j-1))
             if j+1 <= len(tree[0])-1:
-                result[i][j+1] = 0
+                to_be_destroyed.append((i, j+1))
 
-    return result
+    for i, j in to_be_destroyed:
+        tree[i][j] = 0
+
+    return tree
 
 def render(years: list[list[int]]) -> list[str]:
     """Return rendered tree."""
@@ -68,11 +70,11 @@ def TreeOfLife(H: int, W: int, N: int, tree: list[str]) -> list[str]:
         result_years.append(result_row)
 
     for i in range(N):
-        result_years = make_older(result_years)
+        make_older(result_years)
         if i % 2 == 0:
-            result_years = fill_empty(result_years)
+            fill_empty(result_years)
             continue
-        result_years = destroy_arround(result_years)
+        destroy_arround(result_years)
 
     return render(result_years)
 

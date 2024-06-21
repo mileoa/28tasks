@@ -31,5 +31,7 @@ class TreeOfLifeTests(unittest.TestCase):
         self.assertEqual(TreeOfLife(1, 1, 5, ["+"]), ["+"])
         self.assertEqual(TreeOfLife(1, 1, 1, ["."]), ["+"])
 
+        self.assertEqual(TreeOfLife(1, 4, 2, [".++."]), ["...."])
+
 if __name__ == '__main__':
     unittest.main()
