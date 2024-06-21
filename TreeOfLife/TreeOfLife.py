@@ -56,7 +56,7 @@ def render(years: list[list[int]]) -> list[str]:
 
 def TreeOfLife(H: int, W: int, N: int, tree: list[str]) -> list[str]:
     """Return simulated tree growth for N years."""
-    result_rendered: list[str] = tree[:]
+    # Store years of branches.
     result_years: list[list[int]] = []
     for row in tree:
         result_row: list[int] = []
@@ -67,16 +67,14 @@ def TreeOfLife(H: int, W: int, N: int, tree: list[str]) -> list[str]:
             result_row.append(1)
         result_years.append(result_row)
 
-
     for i in range(N):
         result_years = make_older(result_years)
         if i % 2 == 0:
             result_years = fill_empty(result_years)
-        else:
-            result_years = destroy_arround(result_years)
-        result_rendered = render(result_years)
+            continue
+        result_years = destroy_arround(result_years)
 
-    return result_rendered
+    return render(result_years)
 
 
 
