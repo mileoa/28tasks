@@ -1,6 +1,5 @@
 def make_older(tree: list[list[int]]) -> list[list[int]]:
     """Return tree with branches one year older."""
-    tree: list[list[int]] = tree[:]
     for i, row in enumerate(tree):
         for j, el in enumerate(row):
             if el == 0:
@@ -21,7 +20,7 @@ def fill_empty(tree: list[list[int]]) -> list[list[int]]:
 
 def destroy_arround(tree: list[list[int]]) -> list[list[int]]:
     """Return tree with destroyd old branches and branches around."""
-    to_be_destroyed: list[tuple[int]] = []
+    to_be_destroyed: list[tuple[int, int]] = []
     for i, row in enumerate(tree):
         for j, el in enumerate(row):
             if el < 3:
