@@ -12,6 +12,7 @@ class SherlockValidStringTests(unittest.TestCase):
         self.assertEqual(SherlockValidString("xyzzz"), False)
         self.assertEqual(SherlockValidString("xxyyza"), False)
         self.assertEqual(SherlockValidString("xxyyzabc"), False)
+        self.assertEqual(SherlockValidString("xxxxxyyyyy"), True)
 
     def test_border(self):
         self.assertEqual(SherlockValidString("aa"), True)
