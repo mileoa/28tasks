@@ -8,10 +8,6 @@ def swaped_el(F: list[int], i_1: int, i_2: int) -> list[int]:
 def Football(F: list[int], N: int) -> bool:
     sorted_F: list[int] = sorted(F)
 
-    # Already sorted.
-    if F == sorted_F:
-        return True
-
     # Second trick.
     if list(reversed(F)) == sorted_F:
         return True

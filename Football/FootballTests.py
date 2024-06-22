@@ -13,8 +13,9 @@ class FootballTests(unittest.TestCase):
 
     def test_border(self):
         self.assertEqual(Football([1], 1), True)
-        self.assertEqual(Football([1, 2], 2), True)
+        self.assertEqual(Football([1, 2], 2), False)
         self.assertEqual(Football([2, 1], 2), True)
+        self.assertEqual(Football([1, 2, 3], 3), False)
 
 if __name__ == '__main__':
     unittest.main()
