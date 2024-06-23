@@ -8,6 +8,7 @@ def Keymaker(k: int) -> str:
                 result[j] = "0"
                 continue
             result[j] = "1"
+        print("".join(result))
 
     return "".join(result)
 
