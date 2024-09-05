@@ -1,3 +1,6 @@
+EMPTY_CELL_SIGN = "."  
+FILLED_CELL_SIGN = "+"  
+
 def make_older(tree: list[list[int]]) -> list[list[int]]:
     """Return tree with branches one year older."""
     for i, row in enumerate(tree):
@@ -47,9 +50,9 @@ def render(years: list[list[int]]) -> list[str]:
         result_row: list[str] = []
         for el in row:
             if el == 0:
-                result_row.append(".")
+                result_row.append(EMPTY_CELL_SIGN)
                 continue
-            result_row.append("+")
+            result_row.append(FILLED_CELL_SIGN)
         result.append("".join(result_row))
 
     return result
@@ -62,7 +65,7 @@ def TreeOfLife(H: int, W: int, N: int, tree: list[str]) -> list[str]:
     for row in tree:
         result_row: list[int] = []
         for el in row:
-            if el == ".":
+            if el == EMPTY_CELL_SIGN:
                 result_row.append(0)
                 continue
             result_row.append(1)

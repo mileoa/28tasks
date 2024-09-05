@@ -4,12 +4,13 @@ def have_word(string: str, word: str) -> bool:
             return True
     return False
 
+
 def separate_word(word: str, lenght: int) -> list[str]:
     result: list[str] = []
-    for i in range(len(word)//lenght):
-        result.append(word[lenght*i:lenght*(i+1)])
-    if len(word)%lenght != 0:
-        result.append(word[len(word) - len(word)%lenght :])
+    for i in range(len(word) // lenght):
+        result.append(word[lenght * i : lenght * (i + 1)])
+    if len(word) % lenght != 0:
+        result.append(word[len(word) - len(word) % lenght :])
 
     return result
 
@@ -17,14 +18,21 @@ def separate_word(word: str, lenght: int) -> list[str]:
 def add_to_line(lenght: int, word: str, lines: list[str]) -> list[str]:
     current_line: int = len(lines) - 1
 
-    if lines[current_line] == "" and len(word) <= lenght:
+    is_current_line_empty: bool = lines[current_line] == ""
+    is_insertion_to_empty_line: bool = is_current_line_empty and len(word) <= lenght
+    is_word_must_be_transfered: bool = is_current_line_empty and len(word) > lenght
+    is_insertion_to_filled_line_without_transfer: bool = (
+        len(lines[current_line]) + 1 + len(word) <= lenght
+    )
+
+    if is_insertion_to_empty_line:
         lines[current_line] += word
-    elif lines[current_line] == "" and len(word) > lenght:
+    elif is_word_must_be_transfered:
         for sep_word in separate_word(word, lenght):
             lines = add_to_line(lenght, sep_word, lines)
-    elif len(lines[current_line]) + 1 + len(word) <= lenght:
+    elif is_insertion_to_filled_line_without_transfer:
         lines[current_line] += " " + word
-    elif len(lines[current_line]) + 1 + len(word) > lenght:
+    else:
         lines.append("")
         lines = add_to_line(lenght, word, lines)
 
