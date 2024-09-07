@@ -6,6 +6,7 @@ def remove_chars(s: str, char: str) -> str:
             result.append(i)
     return "".join(result)
 
+
 def make_encode_matrix(s: str) -> list[list[str]]:
     """Make cipher matrix from string.
 
@@ -13,43 +14,49 @@ def make_encode_matrix(s: str) -> list[list[str]]:
     Reuslt matrix additionaly has " " as elements
     if string chars does not fills all matrix position.
     """
-    lenght: int = len(s)
-    rows: int = int((lenght**0.5))
-    columns: int = int(lenght**0.5) + 1
+    srting_lenght: int = len(s)
+    rows_amount: int = int((srting_lenght**0.5))
+    columns_amount: int = int(srting_lenght**0.5) + 1
 
-    while rows * columns < lenght:
-        rows += 1
+    while rows_amount * columns_amount < srting_lenght:
+        rows_amount += 1
+    srting_lenght = -1
 
-    while len(s) < rows * columns:
+    while len(s) < rows_amount * columns_amount:
         s += " "
 
     matrix: list[list[str]] = []
     char_i: int = 0
 
-    for i in range(rows):
+    for i in range(rows_amount):
         row: list[str] = []
-        for j in range(columns):
+        for j in range(columns_amount):
             row.append(s[char_i])
             char_i += 1
         matrix.append(row)
+    rows_amount = -1
+    columns_amount = -1
+    char_i = -1
 
     return matrix
 
+
 def make_decode_matrix(s: str) -> list[list[str]]:
     """Make decode matix.
-    
+
     Make matrix from encrypted string.
     Last matrix column may contain additional " " as elements
     to fill empty elements.
     """
     result: list[list[str]] = []
 
-    columns: int = int(len(remove_chars(s, " "))**0.5) + 1
+    columns_amount: int = int(len(remove_chars(s, " ")) ** 0.5) + 1
 
     for i in s.split(" "):
         result.append(list(i))
-        while len(result[-1]) != columns:
+        while len(result[-1]) != columns_amount:
             result[-1].append(" ")
+    columns_amount = -1
 
     return result
 
@@ -65,6 +72,7 @@ def trans_matrix(matrix: list[list[str]]) -> list[list[str]]:
             result[i].append(sub_list[i])
 
     return result
+
 
 def TheRabbitsFoot(s: str, encode: bool) -> str:
     """Encode or decode string with "red suitcase" cipher."""
@@ -85,10 +93,6 @@ def TheRabbitsFoot(s: str, encode: bool) -> str:
         if encode:
             result.append(" ")
     while result[-1] == " ":
-        result.pop() # Delete last space.
+        result.pop()  # Delete last space.
 
     return "".join(result)
-
-
-
-

@@ -1,5 +1,6 @@
-EMPTY_CELL_SIGN = "."  
-FILLED_CELL_SIGN = "+"  
+EMPTY_CELL_SIGN = "."
+FILLED_CELL_SIGN = "+"
+
 
 def make_older(tree: list[list[int]]) -> list[list[int]]:
     """Return tree with branches one year older."""
@@ -11,6 +12,7 @@ def make_older(tree: list[list[int]]) -> list[list[int]]:
 
     return tree
 
+
 def fill_empty(tree: list[list[int]]) -> list[list[int]]:
     """Return tree with filled empty places by 1 year branches."""
     for i, row in enumerate(tree):
@@ -21,6 +23,7 @@ def fill_empty(tree: list[list[int]]) -> list[list[int]]:
 
     return tree
 
+
 def destroy_arround(tree: list[list[int]]) -> list[list[int]]:
     """Return tree with destroyd old branches and branches around."""
     to_be_destroyed: list[tuple[int, int]] = []
@@ -29,19 +32,20 @@ def destroy_arround(tree: list[list[int]]) -> list[list[int]]:
             if el < 3:
                 continue
             to_be_destroyed.append((i, j))
-            if i-1 >= 0:
-                to_be_destroyed.append((i-1, j))
-            if i+1 <= len(tree)-1:
-                to_be_destroyed.append((i+1, j))
-            if j-1 >= 0:
-                to_be_destroyed.append((i, j-1))
-            if j+1 <= len(tree[0])-1:
-                to_be_destroyed.append((i, j+1))
+            if i - 1 >= 0:
+                to_be_destroyed.append((i - 1, j))
+            if i + 1 <= len(tree) - 1:
+                to_be_destroyed.append((i + 1, j))
+            if j - 1 >= 0:
+                to_be_destroyed.append((i, j - 1))
+            if j + 1 <= len(tree[0]) - 1:
+                to_be_destroyed.append((i, j + 1))
 
     for i, j in to_be_destroyed:
         tree[i][j] = 0
 
     return tree
+
 
 def render(years: list[list[int]]) -> list[str]:
     """Return rendered tree."""
@@ -79,6 +83,3 @@ def TreeOfLife(H: int, W: int, N: int, tree: list[str]) -> list[str]:
         destroy_arround(result_years)
 
     return render(result_years)
-
-
-

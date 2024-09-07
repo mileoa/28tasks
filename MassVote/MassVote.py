@@ -2,11 +2,13 @@ def MassVote(N: int, Votes: list[int]) -> str:
     """Return vote result."""
     total_votes: int = sum(Votes)
 
-    percent_for_candidate: dict[int, float] = {}
+    percents_of_votes_for_candidates: dict[int, float] = {}
     for i in range(N):
-        percent_for_candidate[i+1] = round(Votes[i]/total_votes, 3) * 100.0
+        percents_of_votes_for_candidates[i + 1] = (
+            round(Votes[i] / total_votes, 3) * 100.0
+        )
 
-    percent_values: list[float] = list(percent_for_candidate.values())
+    percent_values: list[float] = list(percents_of_votes_for_candidates.values())
     max_percent: float = max(percent_values)
     if percent_values.count(max_percent) > 1:
         return "no winner"
@@ -17,11 +19,8 @@ def MassVote(N: int, Votes: list[int]) -> str:
     else:
         result_text = "minority winner "
 
-    for i, percent in percent_for_candidate.items():
+    for i, percent in percents_of_votes_for_candidates.items():
         if percent == max_percent:
             return result_text + str(i)
 
     return "no winner"
-
-
-

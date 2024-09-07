@@ -1,3 +1,7 @@
+OCTAL_BASE = 8
+HEXADECIMAL_BASE = 16
+
+
 def list_int(num: int) -> list[int]:
     """List int by digits."""
     result: list[int] = []
@@ -24,11 +28,10 @@ def UFO(N: int, data: list[int], octal: bool) -> list[int]:
     """Return converted UFO sygnal."""
     result: list[int] = []
     base: int = 0
-
     if octal:
-        base = 8
+        base = OCTAL_BASE
     else:
-        base = 16
+        base = HEXADECIMAL_BASE
 
     for i in range(N):
         result.append(convert_to_dec(data[i], base))

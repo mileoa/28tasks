@@ -9,16 +9,13 @@ def count_chars(s: str) -> dict[str, int]:
 
     return result
 
+
 def SherlockValidString(s: str) -> bool:
     """Return whether is password valid."""
     if len(set(count_chars(s).values())) == 1:
         return True
     for i in range(len(s)):
-        if len(set(count_chars(s[:i]+s[i+1:]).values())) == 1:
+        if len(set(count_chars(s[:i] + s[i + 1 :]).values())) == 1:
             return True
 
     return False
-
-
-
-

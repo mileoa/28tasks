@@ -13,6 +13,3 @@ def SynchronizingTables(N: int, ids: list[int], salary: list[int]) -> list[int]:
         salary[i] = ids_salary[ids[i]]
 
     return salary
-
-
-

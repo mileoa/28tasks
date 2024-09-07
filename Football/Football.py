@@ -5,6 +5,7 @@ def swaped_el(F: list[int], i_1: int, i_2: int) -> list[int]:
 
     return result
 
+
 def Football(F: list[int], N: int) -> bool:
     sorted_F: list[int] = sorted(F)
 
@@ -14,11 +15,8 @@ def Football(F: list[int], N: int) -> bool:
 
     # First trick.
     for i in range(N):
-        for j in range(i+1, N):
+        for j in range(i + 1, N):
             if swaped_el(F, i, j) == sorted_F:
                 return True
 
     return False
-
-
-
