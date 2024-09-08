@@ -1,50 +1,75 @@
 def circle_to_row(Matrix: list[str], M: int, N: int, circle_num: int) -> list[str]:
     """Return nth circle converted to row."""
     result: list[str] = []
+    result += get_top_row_of_circle(Matrix, M, N, circle_num)
+    result += get_right_column_of_circle(Matrix, M, N, circle_num)[1:-1]
+    result += list(reversed(get_bottom_row_of_circle(Matrix, M, N, circle_num)))
+    result += list(reversed(get_left_column_of_circle(Matrix, M, N, circle_num)))[1:-1]
 
-    # Process horizontal top row left to right.
+    return result
+
+
+def get_top_row_of_circle(
+    Matrix: list[str], M: int, N: int, circle_num: int
+) -> list[str]:
+    """
+    Return horizontal top row left to right.
+    """
+    horizontal_top_row: list[str] = []
 
     from_column: int = circle_num
     to_column: int = N - circle_num
     for i in range(from_column, to_column):
-        result.append(Matrix[circle_num][i])
-    from_column = -1
-    to_column = -1
+        horizontal_top_row.append(Matrix[circle_num][i])
 
-    # Process vertical right column top down
-    # except first and last elements.
+    return horizontal_top_row
 
-    from_row: int = circle_num + 1  # +1 to except first element.
-    to_row: int = M - 1 - circle_num  # -1 to except last element.
+
+def get_right_column_of_circle(
+    Matrix: list[str], M: int, N: int, circle_num: int
+) -> list[str]:
+    """
+    Return right column of circle.
+    """
+    rgiht_column: list[str] = []
+    from_row: int = circle_num
+    to_row: int = M - circle_num
     for i in range(from_row, to_row):
-        result.append(Matrix[i][N - 1 - circle_num])
-    from_row = -1
-    to_row = -1
+        rgiht_column.append(Matrix[i][N - 1 - circle_num])
+    return rgiht_column
 
-    # Process horisontal bottom row right to left.
 
-    # circle_num is offset.
-    from_column = N - 1 - circle_num  # -1 not to be out of range.
-    to_column = circle_num - 1
-    for i in range(from_column, to_column, -1):
-        result.append(Matrix[M - 1 - circle_num][i])
-    from_column = -1
-    to_column = -1
+def get_bottom_row_of_circle(
+    Matrix: list[str], M: int, N: int, circle_num: int
+) -> list[str]:
+    """
+    Return bottom row of circle.
 
-    # Process vertical left column down up
-    # except first and last elements.
+    Circle_num is offset.
+    """
+    bottom_row: list[str] = []
+    from_column = circle_num
+    to_column = N - circle_num
+    for i in range(from_column, to_column):
+        bottom_row.append(Matrix[M - 1 - circle_num][i])
+    return bottom_row
 
-    # circle_num is offset.
+
+def get_left_column_of_circle(
+    Matrix: list[str], M: int, N: int, circle_num: int
+) -> list[str]:
+    """
+    Return left column of circle.
+
+    Circle_num is offset.
+    """
+    left_column: list[str] = []
     # -1 not to be out of range.
-    # -1 to except first element.
-    from_row = M - 1 - 1 - circle_num
-    to_row = circle_num
-    for i in range(from_row, to_row, -1):
-        result.append(Matrix[i][circle_num])
-    from_row = -1
-    to_row = -1
-
-    return result
+    from_row = circle_num
+    to_row = M - circle_num
+    for i in range(from_row, to_row):
+        left_column.append(Matrix[i][circle_num])
+    return left_column
 
 
 def shift_row(row: list[str]) -> list[str]:
