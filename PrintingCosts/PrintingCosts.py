@@ -100,7 +100,6 @@ CHAR_PRINT_DEFAULT_COST = 23
 
 def PrintingCosts(Line: str) -> int:
     """Calculate print cost."""
-
     print_cost_total: int = 0
     for char in Line:
         if CHARS_PRINT_COSTS.get(char) is not None:
