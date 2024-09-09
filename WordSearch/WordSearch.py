@@ -42,14 +42,15 @@ def add_to_line(lenght: int, word: str, lines: list[str]) -> list[str]:
 def WordSearch(len: int, s: str, subs: str) -> list[int]:
     words: list[str] = s.split(" ")
     lines: list[str] = [""]
-    result: list[int] = []
     for word in words:
         lines = add_to_line(len, word, lines)
+    words = None
 
+    word_lines_appearense: list[int] = []
     for line in lines:
         if have_word(line, subs):
-            result.append(1)
+            word_lines_appearense.append(1)
             continue
-        result.append(0)
+        word_lines_appearense.append(0)
 
-    return result
+    return word_lines_appearense
