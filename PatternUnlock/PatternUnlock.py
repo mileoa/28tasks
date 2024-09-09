@@ -22,15 +22,12 @@ def calculate_lenght_between_dots(a: int, b: int) -> float | int:
 
 
 def PatternUnlock(N: int, hits: list[int]) -> str:
-    lenght: float = 0.0
+    lenght: float = round(
+        sum(calculate_lenght_between_dots(hits[i], hits[i + 1]) for i in range(N - 1)),
+        5,
+    )
     result: list[str] = []
-
-    for i in range(N - 1):
-        lenght += calculate_lenght_between_dots(hits[i], hits[i + 1])
-
-    lenght = round(lenght, 5)
-
-    for i, el in enumerate(str(lenght)):
+    for el in str(lenght):
         if el not in ("0", "."):
             result.append(el)
 
