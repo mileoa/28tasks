@@ -8,36 +8,48 @@ def is_more(s1: str, s2: str) -> bool:
     return False
 
 
+def get_normilized_result(arr: list[str]) -> list[str]:
+    normilized_result: list[str] = arr[:]
+    while normilized_result[0] == "0" and len(normilized_result) > 1:
+        del normilized_result[0]
+    return normilized_result
+
+
+def get_normilized_minuend_and_subtrahend(s1: str, s2: str) -> list[list[str], str]:
+    """
+    Return tuple (minuend, subtrahend)
+    """
+    normilized_s1: str = s1
+    normilized_s2: str = s2
+    while len(normilized_s1) > len(normilized_s2):
+        normilized_s2: str = "0" + normilized_s2
+    while len(normilized_s1) < len(normilized_s2):
+        normilized_s1 = "0" + normilized_s1
+
+    minuend: str = ""
+    subtrahend: str = ""
+    if is_more(normilized_s1, normilized_s2):
+        minuend = list(normilized_s1)
+        subtrahend = normilized_s2
+    else:
+        minuend = list(normilized_s2)
+        subtrahend = normilized_s1
+    return (minuend, subtrahend)
+
+
 def BigMinus(s1: str, s2: str) -> str:
     """Return absolute difference."""
-    # Add leading 0 to make str equal len.
-    while len(s1) > len(s2):
-        s2 = "0" + s2
-    while len(s1) < len(s2):
-        s1 = "0" + s1
-
-    # Decide minuend and subtrahend.
-    result: list[str] = []
-    subtrahend: str = ""
-
-    if is_more(s1, s2):
-        result = list(s1)
-        subtrahend = s2
-    else:
-        result = list(s2)
-        subtrahend = s1
+    minuend: list[str]
+    subtrahend: str
+    minuend, subtrahend = get_normilized_minuend_and_subtrahend(s1, s2)
 
     # School arithmetic.
-    for i in range(len(result) - 1, -1, -1):
+    for i in range(len(minuend) - 1, -1, -1):
 
-        if int(result[i]) - int(subtrahend[i]) < 0:
-            result[i - 1] = str(int(result[i - 1]) - 1)
-            result[i] = str(int(result[i]) + 10 - int(subtrahend[i]))
+        if int(minuend[i]) - int(subtrahend[i]) < 0:
+            minuend[i - 1] = str(int(minuend[i - 1]) - 1)
+            minuend[i] = str(int(minuend[i]) + 10 - int(subtrahend[i]))
             continue
-        result[i] = str(int(result[i]) - int(subtrahend[i]))
+        minuend[i] = str(int(minuend[i]) - int(subtrahend[i]))
 
-    # Remove leading zeros.
-    while result[0] == "0" and len(result) > 1:
-        del result[0]
-
-    return "".join(result)
+    return "".join(get_normilized_result(minuend))
