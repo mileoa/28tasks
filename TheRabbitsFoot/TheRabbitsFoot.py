@@ -7,6 +7,34 @@ def remove_chars(s: str, char: str) -> str:
     return "".join(result)
 
 
+def calculate_encode_rows_amount(srting_lenght: int, columns_amount: int) -> int:
+    """
+    Return calculated rows amount.
+    """
+    rows_amount: int = int((srting_lenght**0.5))
+    while rows_amount * columns_amount < srting_lenght:
+        rows_amount += 1
+    return rows_amount
+
+
+def calculate_encode_columns_amount(srting_lenght: int) -> int:
+    """
+    Return calculated columns amount.
+    """
+    return int(srting_lenght**0.5) + 1
+
+
+def get_normilized_string(string: str, rows_amount: int, columns_amount: int) -> str:
+    """
+    Return normilized string with appended spaces to string lenght
+    equel matrix elements amount.
+    """
+    normilized_string: str = string
+    while len(normilized_string) < rows_amount * columns_amount:
+        normilized_string += " "
+    return normilized_string
+
+
 def make_encode_matrix(s: str) -> list[list[str]]:
     """Make cipher matrix from string.
 
@@ -14,29 +42,15 @@ def make_encode_matrix(s: str) -> list[list[str]]:
     Reuslt matrix additionaly has " " as elements
     if string chars does not fills all matrix position.
     """
-    srting_lenght: int = len(s)
-    rows_amount: int = int((srting_lenght**0.5))
-    columns_amount: int = int(srting_lenght**0.5) + 1
-
-    while rows_amount * columns_amount < srting_lenght:
-        rows_amount += 1
-    srting_lenght = -1
-
-    while len(s) < rows_amount * columns_amount:
-        s += " "
-
+    columns_amount: int = calculate_encode_columns_amount(len(s))
+    rows_amount: int = calculate_encode_rows_amount(len(s), columns_amount)
+    normilized_s: str = get_normilized_string(s, rows_amount, columns_amount)
     matrix: list[list[str]] = []
-    char_i: int = 0
-
     for i in range(rows_amount):
         row: list[str] = []
         for j in range(columns_amount):
-            row.append(s[char_i])
-            char_i += 1
+            row.append(normilized_s[i * rows_amount + j])
         matrix.append(row)
-    rows_amount = -1
-    columns_amount = -1
-    char_i = -1
 
     return matrix
 
@@ -49,9 +63,7 @@ def make_decode_matrix(s: str) -> list[list[str]]:
     to fill empty elements.
     """
     result: list[list[str]] = []
-
     columns_amount: int = int(len(remove_chars(s, " ")) ** 0.5) + 1
-
     for i in s.split(" "):
         result.append(list(i))
         while len(result[-1]) != columns_amount:
@@ -61,7 +73,7 @@ def make_decode_matrix(s: str) -> list[list[str]]:
     return result
 
 
-def trans_matrix(matrix: list[list[str]]) -> list[list[str]]:
+def get_transposed_matrix(matrix: list[list[str]]) -> list[list[str]]:
     """Transpose matrix."""
     result: list[list[str]] = []
     for i in range(len(matrix[0])):
@@ -83,10 +95,8 @@ def TheRabbitsFoot(s: str, encode: bool) -> str:
     else:
         matrix = make_decode_matrix(s)
 
-    t_matrix: list[list[str]] = trans_matrix(matrix)
-
     result: list[str] = []
-    for i in t_matrix:
+    for i in get_transposed_matrix(matrix):
         for j in i:
             if j != " ":
                 result.append(j)
