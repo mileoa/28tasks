@@ -26,9 +26,4 @@ def PatternUnlock(N: int, hits: list[int]) -> str:
         sum(calculate_lenght_between_dots(hits[i], hits[i + 1]) for i in range(N - 1)),
         5,
     )
-    result: list[str] = []
-    for el in str(lenght):
-        if el not in ("0", "."):
-            result.append(el)
-
-    return "".join(result)
+    return "".join([el for el in str(lenght) if el not in ("0", ".")])
