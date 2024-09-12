@@ -102,7 +102,7 @@ def TheRabbitsFoot(s: str, encode: bool) -> str:
                 result.append(j)
         if encode:
             result.append(" ")
-    while result[-1] == " ":
-        result.pop()  # Delete last space.
+    result_normilized: str = "".join(result)
+    result_normilized.rstrip(" ")
 
-    return "".join(result)
+    return result_normilized
