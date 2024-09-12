@@ -30,6 +30,6 @@ def UFO(N: int, data: list[int], octal: bool) -> list[int]:
         base = HEXADECIMAL_BASE
 
     result: list[int] = []
-    for i in range(N):
-        result.append(convert_to_dec(data[i], base))
+    for element in data:
+        result.append(convert_to_dec(element, base))
     return result
