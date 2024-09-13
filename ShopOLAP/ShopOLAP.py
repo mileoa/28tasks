@@ -10,16 +10,17 @@ def sort_by_name(item: str) -> str:
 
 def ShopOLAP(N: int, items: list[str]) -> list[str]:
     """Return grouped and sorted desc sold items and amount."""
-    result: list[str] = []
-    for i in items:
-        if i.split()[0] not in [j.split()[0] for j in result]:
-            result.append(i)
+    pre_result: list[str, int] = {}
+    for item in items:
+        item_name: str
+        item_amount: str
+        item_name, item_amount = item.split()
+        if item_name in pre_result:
+            pre_result[item_name] = int(item_amount) + pre_result[item_name]
             continue
-        for k, el in enumerate(result):
-            if i.split()[0] == el.split()[0]:
-                result[k] = (
-                    el.split()[0] + " " + str(int(el.split()[1]) + int(i.split()[1]))
-                )
-                break
+        pre_result[item_name] = int(item_amount)
 
+    result: list[str] = [
+        name + " " + str(amount) for name, amount in pre_result.items()
+    ]
     return sorted(sorted(result, key=sort_by_name), key=sort_by_amount, reverse=True)
