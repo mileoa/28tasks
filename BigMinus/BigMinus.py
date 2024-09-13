@@ -43,9 +43,8 @@ def BigMinus(s1: str, s2: str) -> str:
     subtrahend: str
     minuend, subtrahend = get_normilized_minuend_and_subtrahend(s1, s2)
 
-    # School arithmetic.
+    # Column subtraction.
     for i in range(len(minuend) - 1, -1, -1):
-
         if int(minuend[i]) - int(subtrahend[i]) < 0:
             minuend[i - 1] = str(int(minuend[i - 1]) - 1)
             minuend[i] = str(int(minuend[i]) + 10 - int(subtrahend[i]))

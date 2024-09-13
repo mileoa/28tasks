@@ -1,15 +1,18 @@
+# TODO rewrite logic with using of class
 string: str = ""
 do_list: list[str] = [""]
 i_do_list: int = 0
+
 
 def should_clear_do_list() -> bool:
     """Return whether should clear do list."""
     global do_list
     global i_do_list
 
-    if i_do_list < len(do_list)-1:
+    if i_do_list < len(do_list) - 1:
         return True
     return False
+
 
 def clear_do_list() -> None:
     """Make do list empty."""
@@ -21,13 +24,15 @@ def clear_do_list() -> None:
 
     return None
 
+
 def add_do_list(S: str) -> None:
-    '''Add to do list history.'''
+    """Add to do list history."""
     global do_list
     global i_do_list
 
     do_list.append(S)
     i_do_list += 1
+
 
 def add(S: str) -> str:
     """Add to end of the string."""
@@ -42,6 +47,7 @@ def add(S: str) -> str:
 
     return string
 
+
 def delete(N: int) -> str:
     """Delete last N chars."""
     global string
@@ -50,16 +56,18 @@ def delete(N: int) -> str:
         clear_do_list()
         add_do_list(string)
 
-    string = string[:len(string)-N]
+    string = string[: len(string) - N]
     add_do_list(string)
 
     return string
+
 
 def give(i: int) -> str:
     """Return i el of string or empty string if out of range."""
     if i < 0 or i >= len(string):
         return ""
     return string[i]
+
 
 def Undo() -> str:
     """Undo last changes."""
@@ -73,6 +81,7 @@ def Undo() -> str:
 
     return string
 
+
 def Redo() -> str:
     """Redo last undo."""
     global string
@@ -84,6 +93,7 @@ def Redo() -> str:
         string = do_list[i_do_list]
 
     return string
+
 
 def BastShoe(command: str) -> str:
     """Return result of wanted proccess."""
@@ -116,7 +126,3 @@ def BastShoe(command: str) -> str:
                 result = Redo()
 
     return result
-
-
-
-

@@ -15,6 +15,7 @@ def SherlockValidString(s: str) -> bool:
     if len(set(count_chars(s).values())) == 1:
         return True
     for i in range(len(s)):
+        # Current char meets exact one time in string except itself position.
         if len(set(count_chars(s[:i] + s[i + 1 :]).values())) == 1:
             return True
 

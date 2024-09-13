@@ -7,6 +7,7 @@ def swaped_el(F: list[int], i_1: int, i_2: int) -> list[int]:
 
 
 def Football(F: list[int], N: int) -> bool:
+    """Decide whether list can be ordered using one of two tricks."""
     sorted_F: list[int] = sorted(F)
 
     # Second trick.

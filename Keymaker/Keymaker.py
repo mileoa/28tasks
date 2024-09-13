@@ -8,6 +8,10 @@ def Keymaker(k: int) -> str:
         CLOSED_DOOR_SIGN for i in range(k)
     ]  # All doors are closed.
 
+    # Change status of door.
+    # k == 1 then change all doors.
+    # k == 2 then change every second door.
+    # k == 3 then change evety third second door and so on
     for i in range(k):
         for j in range(i, k, i + 1):
             if doors_status_after_simulation[j] == OPENED_DOOR_SIGN:

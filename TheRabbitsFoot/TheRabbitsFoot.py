@@ -44,6 +44,7 @@ def make_encode_matrix(s: str) -> list[list[str]]:
     """
     columns_amount: int = calculate_encode_columns_amount(len(s))
     rows_amount: int = calculate_encode_rows_amount(len(s), columns_amount)
+    # Must normilize string to have equel amount of elements in matrix and string.
     normilized_s: str = get_normilized_string(s, rows_amount, columns_amount)
     matrix: list[list[str]] = []
     for i in range(rows_amount):
@@ -102,6 +103,8 @@ def TheRabbitsFoot(s: str, encode: bool) -> str:
                 result.append(j)
         if encode:
             result.append(" ")
+
+    # Must remove trailing spaces, that were aded to make valid matrix.
     result_normilized: str = "".join(result)
     result_normilized.rstrip(" ")
 

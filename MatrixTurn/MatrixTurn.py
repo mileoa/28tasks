@@ -139,7 +139,12 @@ def replace_circle_by_row(
 
 
 def MatrixTurn(Matrix: list[str], M: int, N: int, T: int) -> None:
-    """Return Matrix rotated around center T times."""
+    """
+    Return Matrix rotated around center T times.
+
+    M - amount of rows.
+    N - amount of columns.
+    """
     circles_amount: int = int(min(M, N) / 2)
     rows: list[list[str]] = []
 
