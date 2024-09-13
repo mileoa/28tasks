@@ -10,7 +10,7 @@ def sort_by_name(item: str) -> str:
 
 def ShopOLAP(N: int, items: list[str]) -> list[str]:
     """Return grouped and sorted desc sold items and amount."""
-    pre_result: list[str, int] = {}
+    pre_result: dict[str, int] = {}
     for item in items:
         item_name: str
         item_amount: str
