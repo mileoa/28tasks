@@ -6,13 +6,13 @@ def have_word(string: str, word: str) -> bool:
 
 
 def separate_word(word: str, lenght: int) -> list[str]:
-    result: list[str] = []
+    word_separeted_by_lines: list[str] = []
     for i in range(len(word) // lenght):
-        result.append(word[lenght * i : lenght * (i + 1)])
+        word_separeted_by_lines.append(word[lenght * i : lenght * (i + 1)])
     if len(word) % lenght != 0:
-        result.append(word[len(word) - len(word) % lenght :])
+        word_separeted_by_lines.append(word[len(word) - len(word) % lenght :])
 
-    return result
+    return word_separeted_by_lines
 
 
 def add_to_line(lenght: int, word: str, lines: list[str]) -> list[str]:
